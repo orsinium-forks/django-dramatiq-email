@@ -1,0 +1,15 @@
+# IDEs
+.vscode/
+# python
+.python-version
+*.pyc
+__pycache__/
+*.egg-info
+.mypy_cache/
+dist/
+# pytest
+.coverage
+htmlcov/
+# test
+test-*.yaml
+trigger-*.yml
