@@ -1,11 +1,12 @@
 [tool.poetry]
 name = "django-dramatiq-email"
-version = "1.0.0"
+version = "1.0.1"
 description = "A Django email backend using Dramatiq to send emails using background workers"
 authors = ["Tim Drijvers <tim@sendcloud.com>"]
 homepage = "https://github.com/sendcloud/django-dramatiq-email"
 repository = "https://github.com/sendcloud/django-dramatiq-email"
 license = "MIT"
+readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.6"
