@@ -10,7 +10,7 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.6"
-django = "<3.0"
+django = "<3.3"
 dramatiq = "^1.8.1"
 django_dramatiq = ">0.9,<1.0"
 pika = "^1.1.0"
