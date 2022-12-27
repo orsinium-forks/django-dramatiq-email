@@ -13,7 +13,9 @@ TASK_CONFIG = {
     "actor_name": "django_dramatiq_email_send_emails",
     "queue_name": "django_email",
 }
-TASK_CONFIG.update(settings.DRAMATIQ_EMAIL_TASK_CONFIG)
+
+if hasattr(settings, "DRAMATIQ_EMAIL_TASK_CONFIG"):
+    TASK_CONFIG.update(settings.DRAMATIQ_EMAIL_TASK_CONFIG)
 
 
 @dramatiq.actor(**TASK_CONFIG)
