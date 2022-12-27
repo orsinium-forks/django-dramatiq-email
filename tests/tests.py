@@ -58,7 +58,7 @@ def test_email_with_attachment_from_file():
 
 
 def test_send_single_email_object():
-    """ It should accept and send a single EmailMessage object. """
+    """It should accept and send a single EmailMessage object."""
     msg = mail.EmailMessage()
     tasks.send_email(msg)
     assert len(mail.outbox) == 1
@@ -66,7 +66,7 @@ def test_send_single_email_object():
 
 
 def test_send_single_email_object_no_backend_kwargs():
-    """ It should send email with backend_kwargs not provided. """
+    """It should send email with backend_kwargs not provided."""
     msg = mail.EmailMessage()
     tasks.send_email(msg)
     assert len(mail.outbox) == 1
@@ -74,7 +74,7 @@ def test_send_single_email_object_no_backend_kwargs():
 
 
 def test_send_single_email_object_response():
-    """ It should return the number of messages sent, 1 here. """
+    """It should return the number of messages sent, 1 here."""
     msg = mail.EmailMessage()
     messages_sent = tasks.send_email(msg)
     assert messages_sent == 1
@@ -82,7 +82,7 @@ def test_send_single_email_object_response():
 
 
 def test_send_single_email_dict():
-    """ It should accept and send a single EmailMessage dict. """
+    """It should accept and send a single EmailMessage dict."""
     msg = mail.EmailMessage()
     tasks.send_email(email_to_dict(msg))
     assert len(mail.outbox) == 1
@@ -100,7 +100,7 @@ def test_uses_correct_backend(settings, stub_broker, stub_worker):
 
 
 def test_backend_parameters(stub_broker, stub_worker):
-    """ Our backend should pass kwargs to the 'send_emails' task. """
+    """Our backend should pass kwargs to the 'send_emails' task."""
     with patch("django_dramatiq_email.tasks.get_connection") as mock_connection:
         kwargs = {"auth_user": "user", "auth_password": "pass"}
         mail.send_mass_mail(
@@ -118,7 +118,7 @@ def test_backend_parameters(stub_broker, stub_worker):
                     ["to@example.com"],
                 ),
             ],
-            **kwargs
+            **kwargs,
         )
         stub_broker.join("django_email")
         stub_worker.join()
@@ -194,7 +194,7 @@ def test_sending_email(stub_broker, stub_worker):
     assert mail.outbox[0].subject == "test"
 
 
-@pytest.mark.parametrize('mixed_subtype', ['mixed', 'related'])
+@pytest.mark.parametrize("mixed_subtype", ["mixed", "related"])
 def test_sending_html_email(stub_broker, stub_worker, mixed_subtype):
     msg = EmailMultiAlternatives(
         "test", "Testing with Celery! w00t!!", "from@example.com", ["to@example.com"]
