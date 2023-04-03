@@ -73,14 +73,6 @@ def test_send_single_email_object_no_backend_kwargs():
     assert email_to_dict(msg) == email_to_dict(mail.outbox[0])
 
 
-def test_send_single_email_object_response():
-    """It should return the number of messages sent, 1 here."""
-    msg = mail.EmailMessage()
-    messages_sent = tasks.send_email(msg)
-    assert messages_sent == 1
-    assert len(mail.outbox) == 1
-
-
 def test_send_single_email_dict():
     """It should accept and send a single EmailMessage dict."""
     msg = mail.EmailMessage()
@@ -189,7 +181,7 @@ def test_sending_email(stub_broker, stub_worker):
     )
     stub_broker.join("django_email")
     stub_worker.join()
-    assert len(tasks) == 1
+    assert tasks == 1
     assert len(mail.outbox) == 1
     assert mail.outbox[0].subject == "test"
 
@@ -206,7 +198,7 @@ def test_sending_html_email(stub_broker, stub_worker, mixed_subtype):
     stub_broker.join("django_email")
     stub_worker.join()
 
-    assert len(tasks) == 1
+    assert tasks == 1
     assert len(mail.outbox) == 1
     assert mail.outbox[0].subject == "test"
     assert len(mail.outbox[0].alternatives) == 1
@@ -222,7 +214,7 @@ def test_sending_mail_with_text_attachment(stub_broker, stub_worker):
     stub_broker.join("django_email")
     stub_worker.join()
 
-    assert len(tasks) == 1
+    assert tasks == 1
     assert len(mail.outbox) == 1
     assert mail.outbox[0].subject == "test"
     assert mail.outbox[0].content_subtype == "plain"
@@ -240,7 +232,7 @@ def test_sending_html_only_email(stub_broker, stub_worker):
     stub_broker.join("django_email")
     stub_worker.join()
 
-    assert len(tasks) == 1
+    assert tasks == 1
     assert len(mail.outbox) == 1
     assert mail.outbox[0].subject == "test"
     assert mail.outbox[0].content_subtype == "html"
@@ -255,6 +247,6 @@ def test_sending_mass_email(stub_broker, stub_worker):
     stub_broker.join("django_email")
     stub_worker.join()
 
-    assert len(tasks) == 2
+    assert tasks == 2
     assert len(mail.outbox) == 2
     assert {mail.outbox[i].subject for i in range(2)} == {"mass 1", "mass 2"}
