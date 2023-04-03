@@ -6,8 +6,8 @@ import logging
 import dramatiq
 from django.conf import settings
 from django.core.mail import get_connection
-
 from django.core.mail.backends.base import BaseEmailBackend
+
 from django_dramatiq_email.utils import dict_to_email, email_to_dict
 
 TASK_CONFIG = {
